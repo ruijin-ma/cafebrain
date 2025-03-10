@@ -17,6 +17,7 @@ tasks:
 
   sync:
     cmds:
-      - uv pip compile pyproject.toml --constraint {{.CONSTRAINT_URL}} --no-strip-extras --emit-index-url --all-extras --output-file requirements.txt
+      - sed -i 's/apache-airflow==.*/apache-airflow=={{.AIRFLOW_VERSION}}/g' requirements.in
+      - uv pip compile -c {{.CONSTRAINT_URL}} -o requirements.txt requirements.in
+      - uv pip install -r requirements.txt
       - uv pip sync requirements.txt
-      - uv pip install --requirement requirements.txt
