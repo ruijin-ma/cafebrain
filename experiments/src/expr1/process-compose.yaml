@@ -1,0 +1,29 @@
+# All Rights Reserved.
+# Copyright (C) Ruijin Ma, 2025.
+#
+# UNAUTHORIZED COPYING OF THIS FILE, VIA ANY MEDIUM IS STRICTLY PROHIBITED.
+# THE CONTENTS INSIDE THIS FILE ARE PROPRIETARY AND CONFIDENTIAL.
+#
+# This file is covered by the LICENSE file in the root of this project.
+#
+# Written by Ruijin Ma <rjma@live.com>.
+
+---
+version: "0.5"
+
+log_location: ./pc.global.log
+
+processes:
+  mlflow-server:
+    command: |
+      mlflow server
+
+  jupyter-lab:
+    command: |
+      jupyter lab --no-browser -y --autoreload
+
+  airflow:
+    command: |
+      airflow standalone
+    environment:
+      - AIRFLOW_HOME=$PWD/airflow

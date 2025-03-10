@@ -1,1 +1,6 @@
 .venv/
+mlruns/
+airflow/
+
+requirements.txt
+pc.global.log
