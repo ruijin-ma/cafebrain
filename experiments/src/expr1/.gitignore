@@ -1,5 +1,6 @@
 .venv/
 mlruns/
+mlartifacts/
 airflow/
 .ipynb_checkpoints/
 
