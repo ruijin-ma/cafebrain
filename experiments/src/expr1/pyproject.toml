@@ -5,12 +5,20 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = "~=3.12"
 dependencies = [
-  "couler",
-  "dvc[hdfs,s3,ssh,webdav]>=3.59.1",
   "fastapi>=0.115.11",
   "mlflow>=2.20.3",
+  "pydantic>=2.10.6",
   "torch>=2.6.0",
   "torchvision>=0.21.0",
+]
+
+[dependency-groups]
+dev = [
+  "ipykernel>=6.29.5",
+  "jupyterlab>=4.3.5",
+  "couler",
+  "dvc[hdfs,s3,ssh,webdav]>=3.59.1",
+  "doit>=0.36.0",
 ]
 
 [tool.uv]
