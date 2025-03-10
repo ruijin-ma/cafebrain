@@ -15,21 +15,35 @@ silent: true
 tasks:
   default:
     cmds:
-      - echo {{.AIRFLOW_VERSION}}
 
   sync:
     cmds:
-      - defer: rm requirements.txt
+      - |
+        if [ ! -f "requirements.txt" ]; then
+          sed -i 's/apache-airflow==.*/apache-airflow=={{.AIRFLOW_VERSION}}/g' requirements.in
+          uv pip compile -c {{.CONSTRAINT_URL}} -o requirements.txt requirements.in
+        fi
       - uv sync
-      - sed -i 's/apache-airflow==.*/apache-airflow=={{.AIRFLOW_VERSION}}/g' requirements.in
-      - uv pip compile -c {{.CONSTRAINT_URL}} -o requirements.txt requirements.in
       - uv pip install -r requirements.txt
 
-  pcrun:
+  up:
     cmds:
       - process-compose -D
-      - "echo airflow admin password: $(cat airflow/standalone_admin_password.txt)"
-      - sleep 5s
-      - "{{.OPEN_CMD}} http://localhost:8080"
-      - "{{.OPEN_CMD}} http://localhost:8888"
-      - "{{.OPEN_CMD}} http://localhost:5000"
+      - |
+        echo Waiting 10s for servers ready...
+        sleep 10s
+      - "echo Airflow admin password: $(cat airflow/standalone_admin_password.txt)"
+      - "{{.OPEN_CMD}} http://localhost:8080 >/dev/null"
+      - "{{.OPEN_CMD}} http://localhost:8888 >/dev/null"
+      - "{{.OPEN_CMD}} http://localhost:5000 >/dev/null"
+
+  down:
+    cmds:
+      - process-compose down
+
+  clean:
+    cmds:
+      - rm -rf airflow
+      - rm -rf mlruns
+      - rm -rf .venv
+      - rm -f requirements.txt
