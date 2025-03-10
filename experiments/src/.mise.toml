@@ -10,24 +10,17 @@
 
 [env]
 EDITOR = "code --wait"
-MISE_NODE_MIRROR_URL = "https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/"
-NPM_CONFIG_REGISTRY = "https://registry.npmmirror.com/"
 
 [tools]
-age = "latest"
-sops = "latest"
-node = "lts"
 act = "latest"
 updatecli = "latest"
-"npm:commitlint" = "latest"
-"npm:commitizen" = "latest"
-"npm:lefthook" = "latest"
-"ubi:cocogitto/cocogitto" = { version = "latest", exe = "cog" }
+uv = "latest"
 
 [alias]
 
 [settings]
 yes = true
 experimental = true
+python.uv_venv_auto = true
 
 [tasks]
