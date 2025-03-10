@@ -15,6 +15,7 @@ EDITOR = "code --wait"
 act = "latest"
 updatecli = "latest"
 uv = "latest"
+pixi = "latest"
 
 [alias]
 
