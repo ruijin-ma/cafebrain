@@ -15,7 +15,8 @@ EDITOR = "code --wait"
 act = "latest"
 updatecli = "latest"
 uv = "latest"
-pixi = "latest"
+"ubi:F1bonacc1/process-compose" = "latest"
+task = "latest"
 
 [alias]
 

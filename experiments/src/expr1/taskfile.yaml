@@ -1,0 +1,22 @@
+version: '3'
+
+vars:
+  PYTHON_VERSION:
+    sh: |
+      cat .python-version
+  AIRFLOW_VERSION: '{{.AIRFLOW_VERSION}}'
+  CONSTRAINT_URL: "https://raw.githubusercontent.com/apache/airflow/constraints-{{.AIRFLOW_VERSION}}/constraints-{{.PYTHON_VERSION}}.txt"
+
+dotenv: [ '.env' ]
+
+silent: true
+tasks:
+  default:
+    cmds:
+      - echo {{.AIRFLOW_VERSION}}
+
+  sync:
+    cmds:
+      - uv pip compile pyproject.toml --constraint {{.CONSTRAINT_URL}} --no-strip-extras --emit-index-url --all-extras --output-file requirements.txt
+      - uv pip sync requirements.txt
+      - uv pip install --requirement requirements.txt
