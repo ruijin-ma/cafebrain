@@ -1,0 +1,34 @@
+# All Rights Reserved.
+# Copyright (C) Ruijin Ma, 2025.
+#
+# UNAUTHORIZED COPYING OF THIS FILE, VIA ANY MEDIUM IS STRICTLY PROHIBITED.
+# THE CONTENTS INSIDE THIS FILE ARE PROPRIETARY AND CONFIDENTIAL.
+#
+# This file is covered by the LICENSE file in the root of this project.
+#
+# Written by Ruijn Ma <rjma@live.com>.
+
+[env]
+EDITOR = "code --wait"
+MISE_NODE_MIRROR_URL = "https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/"
+NPM_CONFIG_REGISTRY = "https://registry.npmmirror.com/"
+
+[tools]
+age = "latest"
+sops = "latest"
+node = "lts"
+act = "latest"
+updatecli = "latest"
+"npm:commitlint" = "latest"
+"npm:commitizen" = "latest"
+"npm:lefthook" = "latest"
+"ubi:cocogitto/cocogitto" = { version = "latest", exe = "cog" }
+uv = "latest"
+
+[alias]
+
+[settings]
+yes = true
+experimental = true
+
+[tasks]
