@@ -1,6 +1,7 @@
 .venv/
 mlruns/
 airflow/
+.ipynb_checkpoints/
 
 requirements.txt
 pc.global.log

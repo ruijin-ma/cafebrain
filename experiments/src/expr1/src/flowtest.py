@@ -36,7 +36,7 @@ accuracy = accuracy_score(y_test, y_pred)
 
 
 # Set our tracking server uri for logging
-mlflow.set_tracking_uri(uri="http://127.0.0.1:8080")
+mlflow.set_tracking_uri(uri="http://127.0.0.1:5000")
 
 # Create a new MLflow Experiment
 mlflow.set_experiment("MLflow Quickstart")
