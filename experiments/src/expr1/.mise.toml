@@ -24,5 +24,6 @@ task = "latest"
 yes = true
 experimental = true
 python.uv_venv_auto = true
+python.compile = false
 
 [tasks]

@@ -17,6 +17,7 @@ dependencies = [
   "scikit-learn>=1.6.1",
   "torch>=2.6.0",
   "torchvision>=0.21.0",
+  "virtualenv>=20.29.3",
 ]
 
 [dependency-groups]

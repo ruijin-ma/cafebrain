@@ -1,6 +1,7 @@
 .venv/
 mlruns/
 mlartifacts/
+mlflow-dockerfile/
 airflow/
 .ipynb_checkpoints/
 
