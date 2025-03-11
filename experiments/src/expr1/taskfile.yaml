@@ -50,5 +50,5 @@ tasks:
   purge:
     cmds:
       - task: clean    
-      - rm -rf .venv
-      - rm -f requirements.txt
+      - rm -f requirements.txt pc.global.log
+      - rm -rf .venv ipynb_checkpoints mlartifacts mlflow-dockerfile
