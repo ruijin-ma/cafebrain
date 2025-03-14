@@ -1,12 +1,9 @@
-.venv/
-.pixi/
 mlruns/
 mlartifacts/
 mlflow-dockerfile/
 airflow/
 .ipynb_checkpoints/
 
-requirements.txt
 pc.global.log
 
 # pixi environments

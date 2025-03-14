@@ -1,6 +1,11 @@
 [project]
 authors = ["maru <rjma@live.com>"]
-channels = ["conda-forge"]
+channels = [
+    "https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge",
+    "https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch",
+    "https://mirrors.sustech.edu.cn/anaconda-extra/cloud/nvidia",
+    "https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/deepmodeling"
+]
 name = "expr1"
 platforms = ["linux-64"]
 version = "0.1.0"
@@ -20,6 +25,11 @@ python-dotenv = ">=1.0.1,<2"
 torchvision = ">=0.21.0,<0.22"
 scikit-learn = ">=1.6.1,<2"
 pydantic = ">=2.10.6,<3"
+dvc = ">=3.59.1,<4"
+dvc-s3 = ">=3.2.0,<4"
+dvc-ssh = ">=4.2.1,<5"
+dvc-hdfs = ">=3.0.0,<4"
+dvc-webdav = ">=3.0.0,<4"
 
 [system-requirements]
 cuda = "12"
@@ -34,7 +44,6 @@ doit = ">=0.36.0,<0.37"
 
 [pypi-dependencies]
 couler = { git = "https://github.com/couler-proj/couler" }
-dvc = { version = "*", extras = ["hdfs", "s3", "ssh", "webdav"] }
 
 [pypi-options]
 index-url = "https://mirrors.aliyun.com/pypi/simple"
