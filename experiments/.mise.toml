@@ -19,10 +19,8 @@ sops = "latest"
 node = "lts"
 act = "latest"
 updatecli = "latest"
-"npm:commitlint" = "latest"
-"npm:commitizen" = "latest"
-"npm:lefthook" = "latest"
-"ubi:cocogitto/cocogitto" = { version = "latest", exe = "cog" }
+lefthook = "latest"
+"aqua:cocogitto/cocogitto" = "latest"
 
 [alias]
 
