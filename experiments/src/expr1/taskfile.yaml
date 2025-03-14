@@ -21,15 +21,15 @@ tasks:
       - |
         if [ ! -f "requirements.txt" ]; then
           sed -i 's/apache-airflow==.*/apache-airflow=={{.AIRFLOW_VERSION}}/g' requirements.in
-          uv pip compile -c {{.CONSTRAINT_URL}} -o requirements.txt requirements.in
+          mise x -- uv pip compile -c {{.CONSTRAINT_URL}} -o requirements.txt requirements.in
         fi
-      - uv venv --seed  
-      - uv sync
-      - uv pip install -r requirements.txt
+      - mise x -- uv venv --seed  
+      - mise x -- uv sync
+      - mise x -- uv pip install -r requirements.txt
 
   up:
     cmds:
-      - process-compose -D
+      - mise x -- process-compose -D
       - |
         echo Waiting 10s for servers ready...
         sleep 10s
@@ -40,7 +40,7 @@ tasks:
 
   down:
     cmds:
-      - process-compose down
+      - mise x -- process-compose down
 
   clean:
     cmds:

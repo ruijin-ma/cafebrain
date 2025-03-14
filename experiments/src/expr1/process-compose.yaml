@@ -16,14 +16,14 @@ log_location: ./pc.global.log
 processes:
   mlflow-server:
     command: |
-      mlflow server
+      pixi run mlflow server
 
   jupyter-lab:
     command: |
-      jupyter lab --no-browser -y --autoreload
+      pixi run jupyter lab --no-browser -y --autoreload
 
   airflow:
     command: |
-      airflow standalone
+      pixi run airflow standalone
     environment:
       - AIRFLOW_HOME=$PWD/airflow

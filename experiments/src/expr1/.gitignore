@@ -1,4 +1,5 @@
 .venv/
+.pixi/
 mlruns/
 mlartifacts/
 mlflow-dockerfile/
@@ -7,3 +8,7 @@ airflow/
 
 requirements.txt
 pc.global.log
+
+# pixi environments
+.pixi
+*.egg-info

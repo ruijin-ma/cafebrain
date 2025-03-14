@@ -10,6 +10,7 @@
 
 [env]
 EDITOR = "code --wait"
+PYTHONPATH=""
 
 [tools]
 act = "latest"
@@ -17,13 +18,16 @@ updatecli = "latest"
 uv = "latest"
 "ubi:F1bonacc1/process-compose" = "latest"
 task = "latest"
+yq = "latest"
+pixi = "latest"
+"ubi:quantco/pixi-pack" = "latest"
 
 [alias]
 
 [settings]
 yes = true
 experimental = true
-python.uv_venv_auto = true
+python.uv_venv_auto = false
 python.compile = false
 
 [tasks]

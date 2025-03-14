@@ -1,0 +1,40 @@
+[project]
+authors = ["maru <rjma@live.com>"]
+channels = ["conda-forge"]
+name = "expr1"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+matplotlib = ">=3.10.1,<4"
+numpy = ">=2.2.3,<3"
+pandas = ">=2.2.3,<3"
+pytorch-gpu = ">=2.6.0,<3"
+hyperopt = ">=0.2.7,<0.3"
+mlflow = ">=2.20.3,<3"
+psutil = ">=7.0.0,<8"
+pynvml = ">=12.0.0,<13"
+python-dotenv = ">=1.0.1,<2"
+torchvision = ">=0.21.0,<0.22"
+scikit-learn = ">=1.6.1,<2"
+pydantic = ">=2.10.6,<3"
+
+[system-requirements]
+cuda = "12"
+
+[build-dependencies]
+airflow = ">=2.10.5,<3"
+jupyterlab = ">=4.3.5,<5"
+bash_kernel = ">=0.10.0,<0.11"
+ipywidgets = ">=8.1.5,<9"
+virtualenv = ">=20.29.3,<21"
+doit = ">=0.36.0,<0.37"
+
+[pypi-dependencies]
+couler = { git = "https://github.com/couler-proj/couler" }
+dvc = { version = "*", extras = ["hdfs", "s3", "ssh", "webdav"] }
+
+[pypi-options]
+index-url = "https://mirrors.aliyun.com/pypi/simple"
