@@ -24,7 +24,6 @@ pynvml = ">=12.0.0,<13"
 python-dotenv = ">=1.0.1,<2"
 torchvision = ">=0.21.0,<0.22"
 scikit-learn = ">=1.6.1,<2"
-pydantic = ">=2.10.6,<3"
 dvc = ">=3.59.1,<4"
 dvc-s3 = ">=3.2.0,<4"
 dvc-ssh = ">=4.2.1,<5"
@@ -42,6 +41,8 @@ ipywidgets = ">=8.1.5,<9"
 virtualenv = ">=20.29.3,<21"
 doit = ">=0.36.0,<0.37"
 conda = ">=25.1.1,<26"
+gcc = ">=14.2.0,<14.3"
+geventhttpclient = ">=2.3.3,<3"
 
 [pypi-dependencies]
 couler = { git = "https://github.com/couler-proj/couler" }

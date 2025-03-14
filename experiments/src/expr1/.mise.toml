@@ -10,17 +10,16 @@
 
 [env]
 EDITOR = "code --wait"
-PYTHONPATH=""
+_.file = '.env'
 
 [tools]
 act = "latest"
-updatecli = "latest"
-uv = "latest"
 "ubi:F1bonacc1/process-compose" = "latest"
 task = "latest"
 yq = "latest"
 pixi = "latest"
 "ubi:quantco/pixi-pack" = "latest"
+"aqua:docker/cli" = "latest"
 
 [alias]
 

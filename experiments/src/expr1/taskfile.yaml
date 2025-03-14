@@ -1,13 +1,10 @@
 version: '3'
 
 vars:
-  PYTHON_VERSION:
-    sh: |
-      cat .python-version | cut -d. -f1,2
-  AIRFLOW_VERSION: '{{.AIRFLOW_VERSION}}'
-  CONSTRAINT_URL: "https://raw.githubusercontent.com/apache/airflow/constraints-{{.AIRFLOW_VERSION}}/constraints-{{.PYTHON_VERSION}}.txt"
-
+  THISFILE_DIR: '{{.TASKFILE_DIR}}'
   OPEN_CMD: '{{eq OS "linux" | ternary "xdg-open" "open" }}'
+
+  TAG: '{{.TAG | default "latest"}}'
 
 dotenv: [ '.env' ]
 
@@ -18,22 +15,21 @@ tasks:
 
   sync:
     cmds:
-      - |
-        if [ ! -f "requirements.txt" ]; then
-          sed -i 's/apache-airflow==.*/apache-airflow=={{.AIRFLOW_VERSION}}/g' requirements.in
-          mise x -- uv pip compile -c {{.CONSTRAINT_URL}} -o requirements.txt requirements.in
-        fi
-      - mise x -- uv venv --seed  
-      - mise x -- uv sync
-      - mise x -- uv pip install -r requirements.txt
+      - mise x -- pixi i
 
   up:
+    deps:
+      - sync
     cmds:
+      - rm -f pc.global.log
       - mise x -- process-compose -D
       - |
-        echo Waiting 10s for servers ready...
-        sleep 10s
-      - "echo Airflow admin password: $(cat airflow/standalone_admin_password.txt)"
+        echo Waiting 12s for services to be ready...
+        sleep 12s
+        echo ------
+        echo Airflow admin password: $(cat airflow/standalone_admin_password.txt)
+        echo       Jupyterlab token: $(grep -oE 'token=.*"' pc.global.log | uniq | cut -d= -f2 | cut -d\" -f1)
+        echo ------
       - "{{.OPEN_CMD}} http://localhost:8080 >/dev/null"
       - "{{.OPEN_CMD}} http://localhost:8888 >/dev/null"
       - "{{.OPEN_CMD}} http://localhost:5000 >/dev/null"
@@ -50,5 +46,21 @@ tasks:
   purge:
     cmds:
       - task: clean    
-      - rm -f requirements.txt pc.global.log
-      - rm -rf .venv ipynb_checkpoints mlartifacts mlflow-dockerfile
+      - rm -f pc.global.log
+      - rm -rf .pixi .ipynb_checkpoints mlartifacts mlflow-dockerfile
+
+  build:
+    requires:
+      vars: [ RUN_ID ]
+    cmds:
+      - rm -rf mlflow-dockerfile
+      - mise x -- pixi r mlflow models generate-dockerfile --enable-mlserver -m runs:/{{.RUN_ID}}/model
+      - sed -i '/^FROM .*/a ENV PIP_INDEX_URL=https:\/\/mirrors.aliyun.com\/pypi\/simple' mlflow-dockerfile/Dockerfile
+      - sed -i '/^RUN apt-get .*/i RUN sed -i -E "s\/(deb|security).debian.org\/mirrors.aliyun.com\/g" \/etc\/apt\/sources.list.d\/debian.sources' mlflow-dockerfile/Dockerfile
+      - mise x -- docker build -t {{base .THISFILE_DIR}}:{{.TAG}} mlflow-dockerfile
+
+  serve:
+    requires:
+      vars: [ RUN_ID ]
+    cmds:
+      - mise x -- pixi r mlflow models serve --env-manager conda -m runs:/{{.RUN_ID}}/model -p 1234

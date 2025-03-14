@@ -12,18 +12,56 @@
 version: "0.5"
 
 log_location: ./pc.global.log
+log_level: info
 
 processes:
+  main:
+    command: echo Services are ready.
+    depends_on:
+      mlflow-server:
+        condition: process_healthy
+      jupyter-lab:
+        condition: process_healthy
+      airflow-standalone:
+        condition: process_healthy
+
   mlflow-server:
     command: |
       pixi run mlflow server
+    readiness_probe:
+      http_get:
+        scheme: http
+        host: localhost
+        port: 5000
+      initial_delay_seconds: 5
+      period_seconds: 30
+      timeout_seconds: 120
+      success_threshold: 1
 
   jupyter-lab:
     command: |
       pixi run jupyter lab --no-browser -y --autoreload
+    readiness_probe:
+      http_get:
+        scheme: http
+        host: localhost
+        port: 8888
+      initial_delay_seconds: 5
+      period_seconds: 30
+      timeout_seconds: 120
+      success_threshold: 1
 
-  airflow:
+  airflow-standalone:
     command: |
       pixi run airflow standalone
     environment:
       - AIRFLOW_HOME=$PWD/airflow
+    readiness_probe:
+      http_get:
+        scheme: http
+        host: localhost
+        port: 8080
+      initial_delay_seconds: 5
+      period_seconds: 30
+      timeout_seconds: 120
+      success_threshold: 1
