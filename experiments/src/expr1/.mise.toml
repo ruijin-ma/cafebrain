@@ -11,14 +11,19 @@
 [env]
 EDITOR = "code --wait"
 _.file = '.env'
+MISE_NODE_MIRROR_URL = "https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/"
+UV_PYTHON_PREFERENCE = "only-managed"
+UV_DEFAULT_INDEX = "https://pypi.tuna.tsinghua.edu.cn/simple"
 
 [tools]
-act = "latest"
-"ubi:F1bonacc1/process-compose" = "latest"
-task = "latest"
 yq = "latest"
+uv = "latest"
+act = "latest"
 pixi = "latest"
+task = "latest"
+"ubi:F1bonacc1/process-compose" = "latest"
 "ubi:quantco/pixi-pack" = "latest"
+"ubi:dagu-org/dagu" = "latest"
 "aqua:docker/cli" = "latest"
 
 [alias]
