@@ -29,6 +29,7 @@ dvc-s3 = ">=3.2.0,<4"
 dvc-ssh = ">=4.2.1,<5"
 dvc-hdfs = ">=3.0.0,<4"
 dvc-webdav = ">=3.0.0,<4"
+pillow = ">=11.1.0,<12"
 
 [system-requirements]
 cuda = "12"
